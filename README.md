@@ -14,6 +14,7 @@ Link to the deployed page:
 https://brianhaney2020.github.io/03-Password-Generator/
 
 Link to the repository:
+https://github.com/BrianHaney2020/03-Password-Generator
 
 
 Screen Shot:
