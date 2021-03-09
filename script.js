@@ -14,22 +14,22 @@ var generateBtn = document.querySelector("#generate");
 
 function generatePassword(myPasswordLength, myTypesToInclude){
 
-//this works by initializing an empty string tempPassword, adding characters to it, according
-//to the selections made by the user, and then randomly sorting it at the end.
+/*this works by initializing an empty string tempPassword, adding characters to it, according
+to the selections made by the user, and then randomly sorting it at the end.
+The variable myTypesToInclude is an object containing four Boolean variables, one for each
+type of character, as well as a number variable showing how many TRUE values have been selected.*/
+
 
 var tempPassword = "";
-
-//The include<type> variables indicate whether a certain type of character (Upper, Special, Numeric, Lower)
-//is to be included in the password.
-
-
-
-//this variables is a concatenated array containing all the possible characters that could be
-//included in the password.  
 var listAllOptions = [];
+//this variables is a concatenated array containing all the possible characters that could be
+//included in the password. 
 
-var numOfSelectedTypes = 0;
+//var numOfSelectedTypes = 0;
 
+//These next four blocks check to see if a particular type of character was selected.
+//if it was, they add one of those characters randomly selected to the tempPassword.
+//This is to insure that at least one of each selected character type appears in the password.
   if (myTypesToInclude.numeric) {
     tempPassword = tempPassword + listNumeric[Math.floor(Math.random()*listNumeric.length)];
     listAllOptions = listAllOptions.concat(listNumeric);
@@ -50,6 +50,8 @@ var numOfSelectedTypes = 0;
     listAllOptions = listAllOptions.concat(listSpecial);
   };
   
+//This for loop fills out the tempPassword to the desired length, by picking values at random
+//from listAllOptions, which includes the entire set of selected character types.
 for (counter = 0; counter < myPasswordLength - myTypesToInclude.numberTypesSelected; counter++) {
   tempPassword += listAllOptions[Math.floor(Math.random()*listAllOptions.length)];
 };
@@ -60,67 +62,11 @@ console.log(listAllOptions);
   return tempPassword;
 }
 
-function containsUpperCase(myString){
-//This function determines if a string includes any characters in the listUpperCase array
-
-  var counter
-  var temp = false;
-  for (counter = 0; counter < myString.length; counter++ ) {
-    //console.log(myString.charAt(counter));
-    if (listUpperCase.includes(myString.charAt(counter))) {
-      return true;
-    }
-  }
-  return temp;
-}
-
-function containsLowerCase(myString){
-    //This function determines if a string includes any characters in the listLowerCase array
-  var counter
-  var temp = false;
-  for (counter = 0; counter < myString.length; counter++ ) {
-    //console.log(myString.charAt(counter));
-    if (listLowerCase.includes(myString.charAt(counter))) {
-      return true;
-    }
-  }
-  return temp;
-}
-
-function containsSpecial(myString){
-//This function determines if a string includes any characters in the listSpecial array
-  var counter
-  var temp = false;
-  for (counter = 0; counter < myString.length; counter++ ) {
-    //console.log(myString.charAt(counter));
-    if (listSpecial.includes(myString.charAt(counter))) {
-      return true;
-    }
-  }
-  return temp;
-}
-
-function containsNumeric(myString){
-//This function determines if a string includes any characters in the listNumeric array
-  var counter
-  var temp = false;
-  for (counter = 0; counter < myString.length; counter++ ) {
-    //console.log(myString.charAt(counter));
-    if (listNumeric.includes(myString.charAt(counter))) {
-      return true;
-    }
-  }
-  return temp;
-}
-
-
-
-
 // Write password to the #password input
 //temporary comment out...
 function writePassword() {
  
-  var tempPassword = "";
+  //var tempPassword = "";
   var typesToInclude = {
     numeric: false,
     lowerCase: false,
@@ -128,33 +74,36 @@ function writePassword() {
     upperCase: false,
     numberTypesSelected: 0
   };
-  var passwordLength = prompt("How many characters would you like in your choose between 8 and 20", 8);
+
+  var myPrompt = "How many characters would you like in your password?\n";
+  myPrompt += "(Choose a number between " + minLength + " and " + maxLength + ")";
+
+  var passwordLength = prompt(myPrompt, 8);
   if (!(passwordLength >= minLength && passwordLength <= maxLength))  {
     alert("Pick a valid password length");
     writePassword();
   }
 
-  
   var typeChoice = prompt("Include Lower Case (Y/N)?");
-  if (typeChoice === "Y") {
+  if ((typeChoice === "Y") || (typeChoice === "y")) {
     typesToInclude.lowerCase = true;
     typesToInclude.numberTypesSelected++;
   }
 
   var typeChoice = prompt("Include Numerics (Y/N)?");
-  if (typeChoice === "Y") {
+  if ((typeChoice === "Y") || (typeChoice === "y")) {
     typesToInclude.numeric = true;
     typesToInclude.numberTypesSelected++;
   }
 
   var typeChoice = prompt("Include Special Characters (Y/N)?");
-  if (typeChoice === "Y") {
+  if ((typeChoice === "Y") || (typeChoice === "y")) {
     typesToInclude.special = true;
     typesToInclude.numberTypesSelected++;
   }
 
   var typeChoice = prompt("Include Upper Case (Y/N)?");
-  if (typeChoice === "Y") {
+  if ((typeChoice === "Y") || (typeChoice === "y")) {
     typesToInclude.upperCase = true;
     typesToInclude.numberTypesSelected++;
   }
@@ -172,23 +121,11 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-// this is the variable that will store the password's length
 
-
-//these variables will hold the choices about which types are included
-//in the password
-
-
-
-
-
-
-
+function randomSort(myArray) {
 //This function will allow me to sort the password characters randomly once I've created them.
 //I needs this because the first 1-4 characters will be taken from each of the individual
 //lists to make sure I have one from each type selected.
-
-function randomSort(myArray) {
   var newArray = myArray;
   for (i = newArray.length -1; i > 0; i--) {
     j = Math.floor(Math.random() * i)
@@ -199,5 +136,3 @@ function randomSort(myArray) {
 return newArray;
 }
 
-
-//Testing area...
