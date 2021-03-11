@@ -84,26 +84,26 @@ function writePassword() {
     writePassword();
   }
 
-  var typeChoice = prompt("Include Lower Case (Y/N)?");
-  if ((typeChoice === "Y") || (typeChoice === "y")) {
+  var typeChoice1 = confirm("Select OK to include lower case letters");
+  if (typeChoice1 === true) {
     typesToInclude.lowerCase = true;
     typesToInclude.numberTypesSelected++;
   }
 
-  var typeChoice = prompt("Include Numerics (Y/N)?");
-  if ((typeChoice === "Y") || (typeChoice === "y")) {
+  var typeChoice2 = confirm("Select OK to include numbers");
+  if (typeChoice2 === true) {
     typesToInclude.numeric = true;
     typesToInclude.numberTypesSelected++;
   }
 
-  var typeChoice = prompt("Include Special Characters (Y/N)?");
-  if ((typeChoice === "Y") || (typeChoice === "y")) {
+  var typeChoice3 = confirm("Select OK to include special characters");
+  if (typeChoice3 === true) {
     typesToInclude.special = true;
     typesToInclude.numberTypesSelected++;
   }
 
-  var typeChoice = prompt("Include Upper Case (Y/N)?");
-  if ((typeChoice === "Y") || (typeChoice === "y")) {
+  var typeChoice4 = confirm("Select OK to include upper case letters");
+  if (typeChoice4 === true) {
     typesToInclude.upperCase = true;
     typesToInclude.numberTypesSelected++;
   }
